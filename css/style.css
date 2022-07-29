@@ -1,8 +1,44 @@
+* {
+  font-family: "Cormorant SC", serif;
+}
+
 body {
+  background-color: darkgray;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 4rem;
+}
+
+th {
+  font-weight: 500;
+  font-size: 35px;
+}
+
+td {
+  font-weight: 300;
+  font-size: 25px;
+}
+
+.flex-style {
   display: flex;
   flex-direction: column;
+}
+
+.flex-div {
+  display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: darkgray;
+}
+
+#table-div {
+  display: flex;
+  justify-content: center;
+  border: 1px solid;
+}
+
+table,
+th,
+td {
+  border: 1px solid;
 }

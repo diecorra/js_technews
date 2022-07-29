@@ -2,11 +2,31 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <title>JS Last Tech News</title>
+    <title>Tech News</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/loader.css" />
     <style></style>
-    <script defer type="text/javascript" src="js/javascript.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script defer type="text/javascript" src="js/APICall.js"></script>
+    <script defer type="text/javascript" src="js/createElements.js"></script>
   </head>
-  <body></body>
+  <body>
+    <section class="flex-style">
+      <div class="flex-div"><h1>Tech News</h1></div>
+      <div id="loader" class="flex-div"><div class="loader"></div></div>
+      <div class="flex-div" id="table-div" style="display: none">
+        <table id="table-news">
+          <tr>
+            <th>Title</th>
+            <th>Link</th>
+            <th>Date</th>
+          </tr>
+        </table>
+      </div>
+    </section>
+  </body>
 </html>
