@@ -11,34 +11,80 @@ h1 {
   font-size: 4rem;
 }
 
+.flex-style-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-style {
+  display: flex;
+  align-items: center;
+}
+
+table {
+  border: 2px solid;
+  border-radius: 10px;
+  width: 80%;
+}
+
+tr {
+  border: 1px solid;
+}
+
 th {
+  text-align: justify;
   font-weight: 500;
   font-size: 35px;
 }
 
 td {
+  text-align: justify;
   font-weight: 300;
-  font-size: 25px;
+  font-size: 19px;
 }
 
-.flex-style {
+#buttons {
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
-.flex-div {
+#num-page {
+  font-size: 23px;
+}
+
+#next_button {
+  margin-right: 100px;
+}
+
+.button {
+  border-radius: 5%;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
-#table-div {
-  display: flex;
-  justify-content: center;
-  border: 1px solid;
+.no-display {
+  display: none;
 }
 
-table,
-th,
-td {
-  border: 1px solid;
+.active-button {
+  background-color: darkgreen;
+}
+
+.disabled-button {
+  background-color: rgb(0, 100, 0, 0.4);
+  cursor: initial;
+  pointer-events: none;
+}
+
+img {
+  width: 5%;
 }

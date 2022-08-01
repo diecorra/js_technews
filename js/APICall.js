@@ -1,4 +1,13 @@
 const BASE_URL = "https://hacker-news.firebaseio.com/";
+const prev_button = document.getElementById("prev_button");
+const next_button = document.getElementById("next_button");
+const table = document.getElementById("table-news");
+const loader = document.getElementById("loader");
+const num_page = document.getElementById("num-page");
+let infoItem = null;
+let ids = null;
+let start = 0,
+  end = 10;
 
 async function getIds() {
   return await generalFetch(BASE_URL + "v0/newstories.json");
@@ -25,11 +34,11 @@ async function infoItemIds(arrayItemsIds) {
       BASE_URL + "v0/item/" + arrayItemsIds[item] + ".json"
     );
     if (itemInfo != null) {
+      const titleInfo = getStringDateFromDateInSeconds(itemInfo.time);
       arrayResults.push({
-        id: itemInfo.id,
         title: itemInfo.title,
-        time: itemInfo.time,
         url: itemInfo.url,
+        time: titleInfo,
       });
     }
   }
@@ -37,34 +46,75 @@ async function infoItemIds(arrayItemsIds) {
 }
 
 async function getArrayData(start = 0, end = 10) {
-  const ids = await getIds();
-  const infoItem = await infoItemIds(ids.slice(start, end));
-  writeData(infoItem);
-}
-
-function createNewElement(element, text, className) {
-  const new_element = document.createElement(element);
-  text && (new_element.textContent = text);
-  className && new_element.classList.add(className);
-  return new_element;
+  ids = await getIds();
+  if (ids == null || ids == undefined) {
+    alert("errore!!");
+  } else {
+    infoItem = await infoItemIds(ids.slice(start, end));
+  }
+  if (infoItem == null || infoItem == undefined) {
+    alert("errore!!");
+  } else {
+    writeData(infoItem);
+  }
 }
 
 function writeData(elements) {
-  let index = 0;
-  const loader = document.getElementById("loader");
-  loader.style.display = "none";
-  const table = document.getElementById("table-div");
-  document.getElementById("table-div").style.removeProperty("display");
+  checkButtons(ids.length, start, end, prev_button, next_button, num_page);
+  let col = 0;
+  loader.classList.add("no-display");
+  table.classList.remove("no-display");
+  prev_button.classList.remove("no-display");
+  next_button.classList.remove("no-display");
+  num_page.classList.remove("no-display");
+  const type = ["title", "url", "time"];
   for (const element in elements) {
-    var row = table.insertRow(element);
-    for (i = 0; i < 3; i++) {
-      //var cell1 = row.insertCell(0);
-      //var cell2 = row.insertCell(1);
-      //var cell3 = row.insertCell(2);
+    let row = table.insertRow(Number(element) + 1);
+    for (col = 0; col < 3; col++) {
+      let cell = row.insertCell(col);
+      num_page.textContent = start + 1 + "-" + end;
+      if (type[col] == null || type[col] == undefined) {
+        console.log("dd" + type[col]);
+        console.log("rpova");
+        cell.textContent = "NOT AVAIBLE";
+      } else if (type[col] == "url") {
+        const a = document.createElement("a");
+        const link = document.createElement("img");
+        a.href = elements[element][type[col]];
+        a.target = "_blank";
+        link.src = "img/external-link.svg";
+        link.alt = "Link";
+        cell.append(a);
+        a.append(link);
+      } else {
+        cell.textContent = elements[element][type[col]];
+      }
     }
-    const td = createNewElement("td", elements[element].title, "td");
-    table.appendChild(td);
   }
 }
+
+prev_button.addEventListener("click", function () {
+  loader.classList.remove("no-display");
+  table.classList.add("no-display");
+  prev_button.classList.add("no-display");
+  next_button.classList.add("no-display");
+  num_page.classList.add("no-display");
+  deleteRow(infoItem);
+  start -= 10;
+  end -= 10;
+  getArrayData(start, end);
+});
+
+next_button.addEventListener("click", function () {
+  loader.classList.remove("no-display");
+  table.classList.add("no-display");
+  prev_button.classList.add("no-display");
+  next_button.classList.add("no-display");
+  num_page.classList.add("no-display");
+  deleteRow(infoItem);
+  start += 10;
+  end += 10;
+  getArrayData(start, end);
+});
 
 getArrayData();

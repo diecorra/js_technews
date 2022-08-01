@@ -12,20 +12,27 @@
       rel="stylesheet"
     />
     <script defer type="text/javascript" src="js/APICall.js"></script>
-    <script defer type="text/javascript" src="js/createElements.js"></script>
+    <script defer type="text/javascript" src="js/functions.js"></script>
   </head>
   <body>
-    <section class="flex-style">
-      <div class="flex-div"><h1>Tech News</h1></div>
-      <div id="loader" class="flex-div"><div class="loader"></div></div>
-      <div class="flex-div" id="table-div" style="display: none">
-        <table id="table-news">
-          <tr>
-            <th>Title</th>
-            <th>Link</th>
-            <th>Date</th>
-          </tr>
-        </table>
+    <section class="flex-style-col">
+      <div class="flex-style-col"><h1>Tech News</h1></div>
+      <div id="loader" class="flex-style-col"><div class="loader"></div></div>
+      <table id="table-news" class="no-display">
+        <tr>
+          <th>Title</th>
+          <th>Link</th>
+          <th>Date</th>
+        </tr>
+      </table>
+      <div id="buttons">
+        <div class="flex-style">
+          <button id="prev_button" class="button no-display">
+            Previous Page
+          </button>
+          <button id="next_button" class="button no-display">Next Page</button>
+        </div>
+        <div><span id="num-page" class="no-display"></span></div>
       </div>
     </section>
   </body>
