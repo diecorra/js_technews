@@ -23,9 +23,12 @@ table {
     font-size: 1.5rem;
   }
 
-  @media (max-width: 576px) {
+  @media only screen and (max-width: 576px) {
+    #header{
+        max-height: 10%;
+    }
     th {
-        font-size:2.2rem;
+        font-size:1.5rem;
     }
 
     td{
@@ -34,7 +37,7 @@ table {
 
   }
 
-  @media (max-width: 1800px) {
+  @media only screen and (max-width: 1800px) and (min-width: 577px){
     #header{
         max-height: 10%;
     }

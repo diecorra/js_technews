@@ -39,16 +39,22 @@ img {
   width: 1.5rem;
 }
 
-@media (max-width: 576px) {
+@media only screen and (max-width: 576px) {
+  body{
+    height: 100vh;
+}
+section{
+    height: 100%;
+}
   h1 {
-    font-size: 4rem;
+    font-size: 2rem;
   }
   #tech-pic{
-    width: 5rem;
+    width: 3rem;
   }
 }
 
-@media (max-width: 1800px) {
+@media only screen and (max-width: 1800px) and (min-width: 577px){
   body{
     height: 100vh;
 }
