@@ -9,7 +9,7 @@ function getStringDateFromDateInSeconds(seconds) {
   );
 }
 
-function deleteRow(elements) {
+function deleteRow(table, elements) {
   let tr = null;
   for (const element in elements) {
     table.deleteRow(elements.length - Number(element));
@@ -21,8 +21,7 @@ function checkButtons(
   start,
   end,
   prev_button,
-  next_button,
-  num_page
+  next_button
 ) {
   if (start == 0) {
     prev_button.classList.remove("active-button");
@@ -39,4 +38,15 @@ function checkButtons(
     next_button.classList.add("active-button");
     next_button.classList.remove("disabled-button");
   }
+}
+
+function createLinkImg(cell,elements, element, typeCol, col){
+  const a = document.createElement("a");
+  const link = document.createElement("img");
+  a.href = elements[element][typeCol[col]];
+  a.target = "_blank";
+  link.src = "img/external-link.svg";
+  link.alt = "Link";
+  cell.append(a);
+  a.append(link);
 }

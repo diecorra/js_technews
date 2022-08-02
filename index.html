@@ -4,35 +4,33 @@
     <meta charset="UTF-8" />
     <title>Tech News</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/loader.css" />
-    <style></style>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="css/button.css" />
+    <link rel="stylesheet" href="css/table.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;600&display=swap" rel="stylesheet">
     <script defer type="text/javascript" src="js/APICall.js"></script>
     <script defer type="text/javascript" src="js/functions.js"></script>
   </head>
   <body>
     <section class="flex-style-col">
-      <div class="flex-style-col"><h1>Tech News</h1></div>
+      <div id="header" class="flex-style"><h1>Tech News</h1><img id="tech-pic" src="img/tech-pic.png" alt="World News"></div>
       <div id="loader" class="flex-style-col"><div class="loader"></div></div>
       <table id="table-news" class="no-display">
         <tr>
-          <th>Title</th>
-          <th>Link</th>
+          <th style="text-align: center;">Title</th>
           <th>Date</th>
+          <th>Link</th>
         </tr>
       </table>
-      <div id="buttons">
+      <div id="buttons" class="flex-style-col">
+        <div class="flex-style"><span id="num-page" class="no-display"></span></div>
         <div class="flex-style">
           <button id="prev_button" class="button no-display">
             Previous Page
           </button>
           <button id="next_button" class="button no-display">Next Page</button>
         </div>
-        <div><span id="num-page" class="no-display"></span></div>
       </div>
     </section>
   </body>

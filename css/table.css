@@ -1,0 +1,48 @@
+table {
+    border: 2px solid;
+    border-radius: 10px;
+    width: 80%;
+    border-spacing: 0px;
+  }
+  
+  tr:nth-child(2n) {
+    background-color: green;
+  }
+  
+  th {
+    padding: 5px;
+    text-align: justify;
+    font-weight: 300;
+    font-size: 3rem;
+  }
+  
+  td {
+    padding: 7px;
+    text-align: justify;
+    font-weight: 200;
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 576px) {
+    th {
+        font-size:2.2rem;
+    }
+
+    td{
+        font-size: 1rem;
+    }
+
+  }
+
+  @media (max-width: 1800px) {
+    #header{
+        max-height: 10%;
+    }
+    th {
+        font-size:2.5rem;
+    }
+
+    td{
+        font-size: 1.5rem;
+    }
+  }

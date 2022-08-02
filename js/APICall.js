@@ -13,7 +13,6 @@ async function getIds() {
   return await generalFetch(BASE_URL + "v0/newstories.json");
 }
 
-// TODO se passo una chiamata sbagliata, gestire meglio l'eccezione.. visualizzare errore per l'utente
 async function generalFetch(url) {
   try {
     const response = await fetch(`${url}`);
@@ -24,6 +23,7 @@ async function generalFetch(url) {
     }
   } catch (fetchError) {
     console.log("Fetch error:" + fetchError);
+    loader.classList.add("no-display");
   }
 }
 
@@ -37,57 +37,48 @@ async function infoItemIds(arrayItemsIds) {
       const titleInfo = getStringDateFromDateInSeconds(itemInfo.time);
       arrayResults.push({
         title: itemInfo.title,
-        url: itemInfo.url,
         time: titleInfo,
+        url: itemInfo.url,
       });
     }
   }
   return arrayResults;
 }
 
-async function getArrayData(start = 0, end = 10) {
+async function getArrayDataAndWrite(start = 0, end = 10) {
   ids = await getIds();
-  if (ids == null || ids == undefined) {
-    alert("errore!!");
+  if (!ids) {
+    alert("Error loading news, please try again later.");
   } else {
     infoItem = await infoItemIds(ids.slice(start, end));
-  }
-  if (infoItem == null || infoItem == undefined) {
-    alert("errore!!");
-  } else {
-    writeData(infoItem);
+    if (!infoItem) {
+      alert("Error loading news, please try again later.");
+    } else {
+      writeData(infoItem);
+    }
   }
 }
 
 function writeData(elements) {
-  checkButtons(ids.length, start, end, prev_button, next_button, num_page);
+  checkButtons(ids.length, start, end, prev_button, next_button);
   let col = 0;
   loader.classList.add("no-display");
   table.classList.remove("no-display");
   prev_button.classList.remove("no-display");
   next_button.classList.remove("no-display");
   num_page.classList.remove("no-display");
-  const type = ["title", "url", "time"];
+  const typeCol = ["title", "time","url"];
   for (const element in elements) {
     let row = table.insertRow(Number(element) + 1);
     for (col = 0; col < 3; col++) {
       let cell = row.insertCell(col);
-      num_page.textContent = start + 1 + "-" + end;
-      if (type[col] == null || type[col] == undefined) {
-        console.log("dd" + type[col]);
-        console.log("rpova");
-        cell.textContent = "NOT AVAIBLE";
-      } else if (type[col] == "url") {
-        const a = document.createElement("a");
-        const link = document.createElement("img");
-        a.href = elements[element][type[col]];
-        a.target = "_blank";
-        link.src = "img/external-link.svg";
-        link.alt = "Link";
-        cell.append(a);
-        a.append(link);
+      num_page.textContent = start + 1 + " - " + end;
+      if (!elements[element][typeCol[col]]) {
+        cell.textContent = "NOT AVAILABLE";
+      } else if (typeCol[col] === "url") {
+        createLinkImg(cell,elements, element, typeCol, col);
       } else {
-        cell.textContent = elements[element][type[col]];
+        cell.textContent = elements[element][typeCol[col]];
       }
     }
   }
@@ -99,10 +90,10 @@ prev_button.addEventListener("click", function () {
   prev_button.classList.add("no-display");
   next_button.classList.add("no-display");
   num_page.classList.add("no-display");
-  deleteRow(infoItem);
+  deleteRow(table, infoItem);
   start -= 10;
   end -= 10;
-  getArrayData(start, end);
+  getArrayDataAndWrite(start, end);
 });
 
 next_button.addEventListener("click", function () {
@@ -111,10 +102,10 @@ next_button.addEventListener("click", function () {
   prev_button.classList.add("no-display");
   next_button.classList.add("no-display");
   num_page.classList.add("no-display");
-  deleteRow(infoItem);
+  deleteRow(table, infoItem);
   start += 10;
   end += 10;
-  getArrayData(start, end);
+  getArrayDataAndWrite(start, end);
 });
 
-getArrayData();
+getArrayDataAndWrite();

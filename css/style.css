@@ -1,14 +1,9 @@
 * {
-  font-family: "Cormorant SC", serif;
+  font-family: 'Oswald', sans-serif;
 }
 
 body {
   background-color: darkgray;
-}
-
-h1 {
-  font-weight: 700;
-  font-size: 4rem;
 }
 
 .flex-style-col {
@@ -20,71 +15,50 @@ h1 {
 .flex-style {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-table {
-  border: 2px solid;
-  border-radius: 10px;
-  width: 80%;
-}
-
-tr {
-  border: 1px solid;
-}
-
-th {
-  text-align: justify;
-  font-weight: 500;
-  font-size: 35px;
-}
-
-td {
-  text-align: justify;
-  font-weight: 300;
-  font-size: 19px;
-}
-
-#buttons {
-  display: flex;
-  align-items: center;
+h1 {
+  font-weight: 600;
+  font-size: 6rem;
 }
 
 #num-page {
-  font-size: 23px;
+  font-size: 1.5rem;
 }
 
-#next_button {
-  margin-right: 100px;
-}
-
-.button {
-  border-radius: 5%;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+#tech-pic{
+  width: 10rem;
 }
 
 .no-display {
   display: none;
 }
 
-.active-button {
-  background-color: darkgreen;
-}
-
-.disabled-button {
-  background-color: rgb(0, 100, 0, 0.4);
-  cursor: initial;
-  pointer-events: none;
-}
-
 img {
-  width: 5%;
+  width: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 4rem;
+  }
+  #tech-pic{
+    width: 5rem;
+  }
+}
+
+@media (max-width: 1800px) {
+  body{
+    height: 100vh;
+}
+section{
+    height: 100%;
+}
+  h1 {
+    font-size: 3.5rem;
+  }
+  #tech-pic{
+    width: 4rem;
+  }
 }
