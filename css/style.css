@@ -3,7 +3,12 @@
 }
 
 body {
-  background-color: darkgray;
+  background-color: cornflowerblue;
+  height: 100vh;
+}
+
+section{
+  height: 100%;
 }
 
 .flex-style-col {
@@ -40,12 +45,6 @@ img {
 }
 
 @media only screen and (max-width: 576px) {
-  body{
-    height: 100vh;
-}
-section{
-    height: 100%;
-}
   h1 {
     font-size: 2rem;
   }
@@ -55,12 +54,6 @@ section{
 }
 
 @media only screen and (max-width: 1800px) and (min-width: 577px){
-  body{
-    height: 100vh;
-}
-section{
-    height: 100%;
-}
   h1 {
     font-size: 3.5rem;
   }
