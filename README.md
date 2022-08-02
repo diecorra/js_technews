@@ -1,6 +1,6 @@
 # js_technews
 
-JavaScript application that allows the user to read the latest tech news.
+JavaScript application that allows the user to read the latest tech news.<br>
 Created with the use of Hacker News API: https://github.com/HackerNews/API.
 
 Link: https://diecorra.github.io/js_technews/
