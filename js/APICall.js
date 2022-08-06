@@ -4,14 +4,11 @@ const next_button = document.getElementById("next_button");
 const table = document.getElementById("table-news");
 const loader = document.getElementById("loader");
 const num_page = document.getElementById("num-page");
+const typeCol = ["title", "time", "url"];
 let infoItem = null;
 let ids = null;
 let start = 0,
   end = 10;
-
-async function getIds() {
-  return await generalFetch(BASE_URL + "v0/newstories.json");
-}
 
 async function generalFetch(url) {
   try {
@@ -33,79 +30,15 @@ async function infoItemIds(arrayItemsIds) {
     const itemInfo = await generalFetch(
       BASE_URL + "v0/item/" + arrayItemsIds[item] + ".json"
     );
-    if (itemInfo != null) {
-      const titleInfo = getStringDateFromDateInSeconds(itemInfo.time);
+    if (itemInfo) {
       arrayResults.push({
-        title: itemInfo.title,
-        time: titleInfo,
-        url: itemInfo.url,
+        title: itemInfo?.title,
+        time: itemInfo?.time
+          ? getStringDateFromDateInSeconds(itemInfo?.time)
+          : "NOT AVAILABLE",
+        url: itemInfo?.url,
       });
     }
   }
   return arrayResults;
 }
-
-async function getArrayDataAndWrite(start = 0, end = 10) {
-  ids = await getIds();
-  if (!ids) {
-    alert("Error loading news, please try again later.");
-  } else {
-    infoItem = await infoItemIds(ids.slice(start, end));
-    if (!infoItem) {
-      alert("Error loading news, please try again later.");
-    } else {
-      writeData(infoItem);
-    }
-  }
-}
-
-function writeData(elements) {
-  checkButtons(ids.length, start, end, prev_button, next_button);
-  let col = 0;
-  loader.classList.add("no-display");
-  table.classList.remove("no-display");
-  prev_button.classList.remove("no-display");
-  next_button.classList.remove("no-display");
-  num_page.classList.remove("no-display");
-  const typeCol = ["title", "time","url"];
-  for (const element in elements) {
-    let row = table.insertRow(Number(element) + 1);
-    for (col = 0; col < 3; col++) {
-      let cell = row.insertCell(col);
-      num_page.textContent = start + 1 + " - " + end;
-      if (!elements[element][typeCol[col]]) {
-        cell.textContent = "NOT AVAILABLE";
-      } else if (typeCol[col] === "url") {
-        createLinkImg(cell,elements, element, typeCol, col);
-      } else {
-        cell.textContent = elements[element][typeCol[col]];
-      }
-    }
-  }
-}
-
-prev_button.addEventListener("click", function () {
-  loader.classList.remove("no-display");
-  table.classList.add("no-display");
-  prev_button.classList.add("no-display");
-  next_button.classList.add("no-display");
-  num_page.classList.add("no-display");
-  deleteRow(table, infoItem);
-  start -= 10;
-  end -= 10;
-  getArrayDataAndWrite(start, end);
-});
-
-next_button.addEventListener("click", function () {
-  loader.classList.remove("no-display");
-  table.classList.add("no-display");
-  prev_button.classList.add("no-display");
-  next_button.classList.add("no-display");
-  num_page.classList.add("no-display");
-  deleteRow(table, infoItem);
-  start += 10;
-  end += 10;
-  getArrayDataAndWrite(start, end);
-});
-
-getArrayDataAndWrite();
