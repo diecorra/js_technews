@@ -1,15 +1,3 @@
-const BASE_URL = "https://hacker-news.firebaseio.com/";
-const prev_button = document.getElementById("prev_button");
-const next_button = document.getElementById("next_button");
-const table = document.getElementById("table-news");
-const loader = document.getElementById("loader");
-const num_page = document.getElementById("num-page");
-const typeCol = ["title", "time", "url"];
-let infoItem = null;
-let ids = null;
-let start = 0,
-  end = 10;
-
 async function generalFetch(url) {
   try {
     const response = await fetch(`${url}`);
@@ -32,11 +20,11 @@ async function infoItemIds(arrayItemsIds) {
     );
     if (itemInfo) {
       arrayResults.push({
-        title: itemInfo?.title,
+        title: itemInfo?.title ? itemInfo?.title : NOT_AVAILABLE,
         time: itemInfo?.time
           ? getStringDateFromDateInSeconds(itemInfo?.time)
-          : "NOT AVAILABLE",
-        url: itemInfo?.url,
+          : NOT_AVAILABLE,
+        url: itemInfo?.url ? itemInfo?.url : NOT_AVAILABLE,
       });
     }
   }

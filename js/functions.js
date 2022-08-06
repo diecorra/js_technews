@@ -62,8 +62,11 @@ function writeData(elements) {
     for (col = 0; col < 3; col++) {
       let cell = row.insertCell(col);
       num_page.textContent = start + 1 + " - " + end;
-      if (!elements[element][typeCol[col]]) {
-        cell.textContent = "NOT AVAILABLE";
+      if (
+        !elements[element][typeCol[col]] ||
+        elements[element][typeCol[col]] === NOT_AVAILABLE
+      ) {
+        cell.textContent = NOT_AVAILABLE;
       } else if (typeCol[col] === "url") {
         createLinkImg(cell, elements, element, typeCol, col);
       } else {
